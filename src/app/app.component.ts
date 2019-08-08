@@ -62,30 +62,32 @@ export class AppComponent implements OnInit {
 		// Build your player - its a shape
 		this.player = BABYLON.Mesh.CreateSphere("sphere1", 16, 2, this.scene);
 		this.player.y = 2;
+		console.log('player: ', this.player);
+		console.log('aa', new BABYLON.Vector3(this.player.x, this.player.y, this.player.z));
 	}
 
 	private setupFollowCamera(): void {
 		// Must setup player before setting up camera
-		this.camera = new BABYLON.FreeCamera("FreeCamera", new BABYLON.Vector3(0, 5, -10), this.scene);
-		this.camera.setTarget(BABYLON.Vector3.Zero());
+		this.camera = new BABYLON.FreeCamera("FreeCamera", new BABYLON.Vector3(0, 1, -10), this.scene);
+		// this.camera.setTarget(new BABYLON.Vector3(this.player.x, this.player.y, this.player.z));
 		// Parameters: name, position, scene
 		// this.camera = new BABYLON.FollowCamera("FollowCam", new BABYLON.Vector3(0, 10, -10), this.scene);
 		// this.camera.setTarget(this.player);
-
+		this.camera.attachControl(this.canvas, true);
 		// The goal distance of camera from target
-		this.camera.radius = 30;
-
-		// The goal height of camera above local origin (centre) of target
-		this.camera.heightOffset = 10;
-
-		// The goal rotation of camera around local origin (centre) of target in x y plane
-		this.camera.rotationOffset = 0;
-
-		// Acceleration of camera in moving from current to goal position
-		this.camera.cameraAcceleration = 0.005
-
-		// The speed at which acceleration is halted
-		this.camera.maxCameraSpeed = 10
+		// this.camera.radius = 30;
+		//
+		// // The goal height of camera above local origin (centre) of target
+		// this.camera.heightOffset = 10;
+		//
+		// // The goal rotation of camera around local origin (centre) of target in x y plane
+		// this.camera.rotationOffset = 0;
+		//
+		// // Acceleration of camera in moving from current to goal position
+		// this.camera.cameraAcceleration = 0.005
+		//
+		// // The speed at which acceleration is halted
+		// this.camera.maxCameraSpeed = 10
 
 		// NOTE:: SET CAMERA TARGET AFTER THE TARGET'S CREATION AND NOTE CHANGE FROM BABYLONJS V 2.5
 		//targetMesh created here.
@@ -108,29 +110,30 @@ export class AppComponent implements OnInit {
 		this.scene.onBeforeRenderObservable.add(() => {
 			var keydown = false;
 			if (inputMap["w"] || inputMap["ArrowUp"]) {
-				this.player.position.z += 0.1;
-				// this.camera.position.z += 0.1;
+				// this.player.position.z += 0.1;
+				this.camera.position.z += 0.1;
 				// this.player.rotation.y = 0
 				keydown = true;
 			}
 			if (inputMap["a"] || inputMap["ArrowLeft"]) {
-				this.player.position.x -= 0.1;
-				// this.camera.position.x -= 0.1;
+				// this.player.position.x -= 0.1;
+				this.camera.position.x -= 0.1;
 				// this.player.rotation.y = 3 * Math.PI / 2
 				keydown = true;
 			}
 			if (inputMap["s"] || inputMap["ArrowDown"]) {
-				this.player.position.z -= 0.1;
-				// this.camera.position.z -= 0.1;
+				// this.player.position.z -= 0.1;
+				this.camera.position.z -= 0.1;
 				keydown = true;
 			}
 			if (inputMap["d"] || inputMap["ArrowRight"]) {
-				this.player.position.x += 0.1;
-				// this.camera.position.x += 0.1;
+				// this.player.position.x += 0.1;
+				this.camera.position.x += 0.1;
 				// this.player.rotation.y = Math.PI / 2
 				keydown = true;
 			}
 			if (keydown) {
+				// this.camera.setTarget(new BABYLON.Vector3(this.player.x, this.player.y, this.player.z));
 				// if the character is moving then lets ove the camera too
 				// this.camera.position = this.player.position.clone();
 				// let ray = this.camera.getForwardRay();
