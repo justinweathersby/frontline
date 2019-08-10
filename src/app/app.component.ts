@@ -75,10 +75,10 @@ export class AppComponent implements OnInit {
 		// Ground
 		var ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground", "assets/textures/heightMap.png", 100, 100, 100, 0, 5, this.scene, false);
 		var groundMaterial = new BABYLON.StandardMaterial("ground", this.scene);
-		groundMaterial.diffuseTexture = new BABYLON.Texture("assets/textures/ground.jpg", this.scene);
-
-		groundMaterial.diffuseTexture.uScale = 6;
-		groundMaterial.diffuseTexture.vScale = 6;
+		var groundTexture = new BABYLON.Texture("assets/textures/ground.jpg", this.scene);
+		groundTexture.uScale = 6;
+		groundTexture.vScale = 6;
+		groundMaterial.diffuseTexture = groundTexture;
 		groundMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
 		groundMaterial.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3);
 		ground.material = groundMaterial;
