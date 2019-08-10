@@ -84,25 +84,11 @@ export class AppComponent implements OnInit {
 		ground.material = groundMaterial;
 		ground.receiveShadows = true;
 		ground.checkCollisions = true;
-
-		// Color box
-		// var redMat = new BABYLON.StandardMaterial("redMat", this.scene);
-		// redMat.ambientColor = new BABYLON.Color3(1, 0, 0);
-		// var greenMat = new BABYLON.StandardMaterial("redMat", this.scene);
-		// greenMat.ambientColor = new BABYLON.Color3(0, 1, 0);
-		// greenMat.ambientColor = new BABYLON.Color3(0, 1, 0);
-		// // this.player.material = redMat;
-		//
-		// // Color ground
-		// ground.material = greenMat;
 	};
 
 	private setupPlayer(): void {
 		// Build your player - its a shape
 		this.player = BABYLON.Mesh.CreateSphere("sphere1", 16, 2, this.scene);
-		this.player.y = 2;
-		console.log('player: ', this.player);
-		console.log('aa', new BABYLON.Vector3(this.player.x, this.player.y, this.player.z));
 	}
 
 	private setupPlayerCamera(): void {
@@ -117,6 +103,12 @@ export class AppComponent implements OnInit {
 		// Collisions
 		this.camera.checkCollisions = true;
 		this.camera.applyGravity = true;
+
+		// Remap Camera Codes
+		this.camera.keysUp = [87]; // W
+		this.camera.keysDown = [83]; // S
+		this.camera.keysLeft = [65]; // A
+		this.camera.keysRight = [68]; // D
 
 		// The goal distance of camera from target
 		// this.camera.radius = 30;
